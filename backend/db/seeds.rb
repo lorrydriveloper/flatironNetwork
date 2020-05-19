@@ -15,7 +15,10 @@ companies = [
     name: 'Flatiron School',
     logo: 'https://en.wikipedia.org/wiki/Flatiron_School#/media/File:FS_wiki.png',
     address: '11 Broadway, 2nd Floor New York , NY 10004'
-  }
+  },
+    name: "Spotify USA",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/240px-Spotify_logo_without_text.svg.png",
+    address: "4 World Trade Center 150 Greenwich Street, 62nd Floor New York, NY 10007 USA",
 ]
-
+Company.destroy_all
 Company.create(companies)
