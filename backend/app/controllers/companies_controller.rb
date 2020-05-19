@@ -12,13 +12,27 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    pry
-    # company = Company.new(company_params)
-    # if @company.save
-    #   render json: company, except: %i[created_at updated_at]
-    # else
-    #   render json: { message: 'Error saving on DB' }
-    # end
+    company = Company.new(company_params)
+    if company.save
+      render json: company, except: %i[created_at updated_at]
+    else
+      render json: {
+        status: 404,
+        message: 'Error saving on DB'
+      }
+    end
+  end
+
+  def update
+    company = Company.find(params[:id])
+    if company.update_attributes(company_params)
+      render json: company, except: %i[created_at updated_at]
+    else
+      render json: {
+        status: 404,
+        message: 'Error saving on DB'
+      }
+    end
   end
 
   private
