@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
-class CompaniesController < ApplicationController
+class Api::V1::CompaniesController < ApplicationController
   def index
     companies = Company.all
     render json: companies, except: %i[created_at updated_at]
   end
 
   def show
-    company = Company.find(params[:id])
-    render json: company, except: %i[created_at updated_at]
+    company = Company.friendly.find(params[:id])
+    if company
+      render json: company, except: %i[created_at updated_at]
+    else
+      render json: { status: 'error', message: "Can't find " }, status: :bad_request
+    end
   end
 
   def create
@@ -24,7 +28,7 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    company = Company.find(params[:id])
+    company = Company.friendly.find(params[:id])
     if company.update_attributes(company_params)
       render json: company, except: %i[created_at updated_at]
     else
