@@ -58,6 +58,7 @@ h2{
   margin: 15px;
   align-self: center;
   height: 75px;
+  max-width: 50%;
 }
 .company__info {
   font-size: 20px;

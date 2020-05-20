@@ -23,8 +23,10 @@ function fetchCompanies() {
     .catch((error) => console.log(error.message));
 }
 
-function renderCompany({logo, name, slug}) {
-  
+function renderCompany({logo, name, slug, users}) {
+  if(users.length == 0){
+    return ''
+  }
   return `
           <div class="company">
             <img
@@ -33,7 +35,7 @@ function renderCompany({logo, name, slug}) {
             />
             <div class="company__info">
               <h3>${name}</h3>
-              <h4>grads working here 3</h4>
+              <h4>grads working here ${users.length}</h4>
             </div>
           </div>
   `;

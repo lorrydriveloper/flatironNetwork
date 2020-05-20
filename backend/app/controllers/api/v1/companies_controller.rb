@@ -3,13 +3,13 @@
 class Api::V1::CompaniesController < ApplicationController
   def index
     companies = Company.all
-    render json: companies, except: %i[created_at updated_at]
+    render json: companies, include: :users
   end
 
   def show
     company = Company.friendly.find(params[:id])
     if company
-      render json: company, except: %i[created_at updated_at]
+      render json: company, except: %i[created_at updated_at], include: :users
     else
       render json: { status: 'error', message: "Can't find " }, status: :bad_request
     end
