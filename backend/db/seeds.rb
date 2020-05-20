@@ -51,7 +51,7 @@ course = ['Software Engineering', 'Data Science', 'Cybersecurity', 'UX/UI Design
 campus = ['Austin', 'Chicago', 'Denver', 'Houston', 'New York', 'San Francisco', 'Seattle', 'Washington, D.C.', 'London', 'Online']
 
 Company.all.each do |company|
-  rand(0...20).times do
+  rand(0..20).times do
     date = Faker::Date.in_date_period(year: rand(2019...2020), month: rand(1..12))
     User.create(
       name: Faker::Name.name,
