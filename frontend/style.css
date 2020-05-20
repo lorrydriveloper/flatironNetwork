@@ -16,27 +16,31 @@ h1 {
   padding: 20px;
   text-align: center;
 }
-/* h2{
+h2{
   text-transform: uppercase;
-  d
-} */
+  text-align: center;
+  margin: 10px;
+}
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
 }
 
 #grads {
-  width: 50%;
+  width: 50vw;
   height: 50vh;
   background-color: red;
   padding: 5px;
 }
 #companies {
   overflow-y: auto;
-  width: 50%;
+  width: 50vw;
   height: 50vh;
   background-color: yellow;
   padding: 5px;
 }
+
 .grid-container {
   margin-top: 40px;
   display: grid;
@@ -66,4 +70,17 @@ h1 {
   font-size: 30px;
   text-align: center;
   margin-bottom: 5px;
+}
+
+
+#map{
+  padding: 50px;
+  height: 50vh;
+  width: 50vw;
+}
+
+#info{
+  height: 50vh;
+  width:  50vw;
+  background-color:yellowgreen;
 }
