@@ -172,21 +172,29 @@ function initMap(allGrads) {
   </div>
 </div>`;
 
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString,
-  });
+
   let a =  allGrads
-  let array = a.map(a => {
+  let markers = a.map(a => {
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
     let marker = new google.maps.Marker({
         position: { lat: (getRandomInRange(-90,90,7)), lng: (getRandomInRange(-180,180,7)) },
         map: map,
         title: "Hello World",
+        infowindow: infowindow
       })
       marker.addListener("click", function () {
+        closeMarkers(map)
         infowindow.open(map, marker);
       });
       return marker
   });
+  function closeMarkers(map) {
+       markers.forEach(function (marker) {
+         marker.infowindow.close(map, marker);
+       }); 
+  }
 
 }
 
