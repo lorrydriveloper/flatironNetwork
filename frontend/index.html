@@ -12,6 +12,13 @@
       <div id="grads">
         <div class="toolkit">
           <h2>Flatiron Grads</h2>
+          <select name="filter" id="filter">
+            <option value="all">All</option>
+            <option value="course">Course</option>
+            <option value="campus">Campus</option>
+          </select>
+          <input type="search" name="query" id="query">
+          <input type="button" value="Search By" id="search">
 
           <button>add new grad</button>
         </div>
@@ -29,16 +36,14 @@
       <div id="map"></div>
       <div id="info">
         <h2>Company info</h2>
-        <div class="diplay-info"></div>
+        <div class="display-info"></div>
       </div>
     </div>
   </body>
   <script src="index.js"></script>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhzq1NujP1j5j-G3uApbjV8vm0hIQpgFQ&callback=initMap"
-    async
-    defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhzq1NujP1j5j-G3uApbjV8vm0hIQpgFQ"
+
   ></script>
 </html>

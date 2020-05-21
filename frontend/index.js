@@ -1,5 +1,8 @@
-const companies = document.querySelector("#companies .grid-container");
+const companies = document.querySelector("#companies");
+const displayCompanies = companies.querySelector(".grid-container");
 const grads = document.querySelector("#grads");
+const info = document.querySelector("#info");
+const displayInfo = info.querySelector(".display-info");
 const displayGrads = grads.querySelector(".grid-container");
 const searchGradButton = document.querySelector("#searchGrad");
 let allGrads = [];
@@ -8,6 +11,23 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchCompanies();
   fetchGrads();
 });
+
+grads.addEventListener("click", function gradsEvents(event) {
+  if (event.target.id == "search") {
+    makeSearch(this);
+  }
+});
+
+companies.addEventListener('click', function companiesEvents(event) {
+    if(event.target.parentElement.id || event.target.id){
+        let id = event.target.parentElement.id || event.target.id;
+        fetchCompany(id)
+    }
+})
+
+
+
+
 
 function fetchCompanies() {
   let configurationObject = {
@@ -18,11 +38,10 @@ function fetchCompanies() {
     },
     // body: JSON.stringify({ trainer_id: trainerId }),
   };
-
   fetch(URL + "companies", configurationObject)
     .then((response) => response.json())
     .then((json) => {
-      companies.innerHTML += json.map(renderCompany).join("");
+      displayCompanies.innerHTML += json.map(renderCompany).join("");
     })
     .catch((error) => console.log(error.message));
 }
@@ -39,12 +58,35 @@ function fetchGrads() {
   fetch(URL + "users", configurationObject)
     .then((response) => response.json())
     .then((json) => {
-      displayGrads.innerHTML += json.map(renderGrads).join("");
+      displayGrads.innerHTML += json.map(renderGrad).join("");
       allGrads = json;
+      initMap(allGrads)
     })
     .catch((error) => console.log(error.message));
 }
-function renderGrads({ name, avatar, campus, cohort, course }) {
+
+function fetchCompany(companySlug) {
+    let configurationObject = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      // body: JSON.stringify({ trainer_id: trainerId }),
+    };
+    fetch(URL + "companies/" + companySlug, configurationObject)
+      .then((response) => response.json())
+      .then((json) => {
+        initMap(json.users);
+        displayInfo.innerHTML = ''
+        displayInfo.innerHTML += json.users.map(renderGrad).join("");
+      })
+      .catch((error) => console.log(error.message));
+}
+
+
+
+function renderGrad({ name, avatar, campus, cohort, course }) {
   return `
     <div class='card'>
       <h1>${name}</h1>
@@ -57,7 +99,7 @@ function renderCompany({ logo, name, slug, users }) {
     return "";
   }
   return `
-          <div class="company">
+          <div class="company" id='${slug}'>
             <img
               src="${logo}"
               alt="${slug}-logo"
@@ -70,51 +112,40 @@ function renderCompany({ logo, name, slug, users }) {
   `;
 }
 
-function searchGradby(filter, query) {
-  if (filter.innerText == 'ALL') {
-    displayGrads.innerHTML += allGrads.map(renderGrads).join("");
-    return
+function searchGradBy(filter, query) {
+  let output = allGrads;
+  if (filter !== "all") {
+    output = filterGrads = allGrads.filter(
+      (grad) => grad[filter].toLowerCase() === query
+    );
   }
-  filter = filter.innerText.toLowerCase()
-  query = query.value.toLowerCase()
-  let n = allGrads.filter(graduate => graduate[filter].toLowerCase() == query)
+  return output;
+}
+function renderSearch(array) {
   displayGrads.innerHTML = "";
-  displayGrads.innerHTML += n.map(renderGrads).join("");
-  console.log(n)
+  displayGrads.innerHTML = array.map(renderGrad).join("");
 }
 
-grads.addEventListener("click", function (event) {
-  document.querySelector(".dropdown ul").classList.remove("active");
-  if(event.target.className == "default_option") {
-    document.querySelector(".dropdown ul").classList.add("active");
-  }
-  if(event.target.tagName == 'LI'){
-      let text = event.target.innerText;
-      document.querySelector(".default_option").innerText = text;
-      document.querySelector(".dropdown ul").classList.remove("active");
-  }
-  if(event.target.className == "fas fa-search") {
-   let filter = this.querySelector(".default_option");
-   let query = this.querySelector(".input");
-   searchGradby(filter,query)
-   filter.innerText = 'ALL'
-   query.value =''
-  }
-
-});
-
+function makeSearch(pointer) {
+  let filter = pointer.querySelector("#filter");
+  let query = pointer.querySelector("#query");
+  let result = searchGradBy(filter.value, query.value);
+  renderSearch(result);
+  filter.value = "all";
+  query.value = "";
+}
 
 // google Maps
 
- var map;
- function initMap() {
-   let coordinates = { lat: 52.6655976, lng: -2.4558356 };
-   map = new google.maps.Map(document.getElementById("map"), {
-     center: coordinates,
-     zoom: 15,
-   });
 
-   var contentString = `
+function initMap(allGrads) {
+  let coordinates = { lat: 52.6655976, lng: -2.4558356 };
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: coordinates,
+    zoom:2,
+  });
+
+  var contentString = `
       <div id="content">
       <div id="siteNotice"></div>
       <h1 id="firstHeading" class="firstHeading">Uluru</h1>
@@ -141,16 +172,25 @@ grads.addEventListener("click", function (event) {
   </div>
 </div>`;
 
-   var infowindow = new google.maps.InfoWindow({
-     content: contentString,
-   });
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
+  let a =  allGrads
+  let array = a.map(a => {
+    let marker = new google.maps.Marker({
+        position: { lat: (getRandomInRange(-90,90,7)), lng: (getRandomInRange(-180,180,7)) },
+        map: map,
+        title: "Hello World",
+      })
+      marker.addListener("click", function () {
+        infowindow.open(map, marker);
+      });
+      return marker
+  });
 
-   var marker = new google.maps.Marker({
-     position: coordinates,
-     map: map,
-     title: "Hello World",
-   });
-   marker.addListener("click", function () {
-     infowindow.open(map, marker);
-   });
- }
+}
+
+function getRandomInRange(from, to, fixed) {
+    return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+    // .toFixed() returns string, so ' * 1' is a trick to convert to number
+}
