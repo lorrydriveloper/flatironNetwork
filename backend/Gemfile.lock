@@ -85,6 +85,7 @@ GEM
     ffi (1.12.2)
     friendly_id (5.2.5)
       activerecord (>= 4.0.0)
+    geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.2)
@@ -183,6 +184,7 @@ DEPENDENCIES
   devise_token_auth
   faker!
   friendly_id (~> 5.2.4)
+  geocoder
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry
