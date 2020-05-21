@@ -3,22 +3,10 @@ import ApiAdapter from "./modules/api.js";
 let allGrads = [];
 
 document.addEventListener("DOMContentLoaded", function () {
-  // ApiAdapter.getRequest('companies');
+  ApiAdapter.fetchCompanies();
   ApiAdapter.fetchGrads();
-  DOM.addListeners()
+  DOM.addListeners();
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 function searchGradBy(filter, query) {
   let output = allGrads;
@@ -45,13 +33,13 @@ function makeSearch(pointer) {
 
 // google Maps
 
-var map
+var map;
 function initMap(allGrads) {
-    let coordinates = { lat: 52.6655976, lng: -2.4558356 };
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 35, lng: -50},
-      zoom: 3,
-    });
+  let coordinates = { lat: 52.6655976, lng: -2.4558356 };
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 35, lng: -50 },
+    zoom: 3,
+  });
 
   var contentString = `
       <div id="content">
@@ -80,33 +68,34 @@ function initMap(allGrads) {
   </div>
 </div>`;
 
-
-  let a =  allGrads
-  let markers = a.map(a => {
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString,
-      });
+  let a = allGrads;
+  let markers = a.map((a) => {
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+    });
     let marker = new google.maps.Marker({
-        position: { lat: (getRandomInRange(-90,90,7)), lng: (getRandomInRange(-180,180,7)) },
-        map: map,
-        title: `hello`,
-        infowindow: infowindow
-      })
-      marker.addListener("click", function () {
-        closeMarkers(map)
-        infowindow.open(map, marker);
-      });
-      return marker
+      position: {
+        lat: getRandomInRange(-90, 90, 7),
+        lng: getRandomInRange(-180, 180, 7),
+      },
+      map: map,
+      title: `hello`,
+      infowindow: infowindow,
+    });
+    marker.addListener("click", function () {
+      closeMarkers(map);
+      infowindow.open(map, marker);
+    });
+    return marker;
   });
   function closeMarkers(map) {
-       markers.forEach(function (marker) {
-         marker.infowindow.close(map, marker);
-       }); 
+    markers.forEach(function (marker) {
+      marker.infowindow.close(map, marker);
+    });
   }
-
 }
 //  TO DELETE WHEN REAL DATA IS POPULATE
 function getRandomInRange(from, to, fixed) {
-    return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
-    // .toFixed() returns string, so ' * 1' is a trick to convert to number
+  return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+  // .toFixed() returns string, so ' * 1' is a trick to convert to number
 }
