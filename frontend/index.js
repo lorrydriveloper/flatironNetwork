@@ -1,6 +1,6 @@
 import DOM from "./modules/render.js";
 import ApiAdapter from "./modules/api.js";
-let allGrads = [];
+
 
 document.addEventListener("DOMContentLoaded", function () {
   ApiAdapter.fetchCompanies();
@@ -8,28 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   DOM.addListeners();
 });
 
-function searchGradBy(filter, query) {
-  let output = allGrads;
-  if (filter !== "all") {
-    output = filterGrads = allGrads.filter(
-      (grad) => grad[filter].toLowerCase() === query
-    );
-  }
-  return output;
-}
-function renderSearch(array) {
-  displayGrads.innerHTML = "";
-  displayGrads.innerHTML = array.map(renderGrad).join("");
-}
-
-function makeSearch(pointer) {
-  let filter = pointer.querySelector("#filter");
-  let query = pointer.querySelector("#query");
-  let result = searchGradBy(filter.value, query.value);
-  renderSearch(result);
-  filter.value = "all";
-  query.value = "";
-}
 
 // google Maps
 
