@@ -8,7 +8,6 @@ class CreateLocations < ActiveRecord::Migration[6.0]
       t.string :country
       t.float :latitude
       t.float :longitude
-
       t.timestamps
     end
   end
