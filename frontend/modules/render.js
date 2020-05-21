@@ -1,3 +1,5 @@
+import ApiAdapter from "../modules/api.js";
+
 class DOM {
   static grads = document.querySelector("#grads");
   static companies = document.querySelector("#companies");
@@ -24,7 +26,7 @@ class DOM {
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
       if (event.target.id == "search") {
-        makeSearch(this);
+        DOM.makeSearch(this);
       }
       if (event.target.id == "new-grad") {
         DOM.renderNewGradForm();
@@ -37,7 +39,7 @@ class DOM {
     companies.addEventListener("click", function companiesEvents(event) {
       if (event.target.parentElement.id || event.target.id) {
         let id = event.target.parentElement.id || event.target.id;
-        fetchCompany(id);
+        ApiAdapter.fetchCompany(id);
       }
     });
   }
@@ -65,6 +67,33 @@ class DOM {
       <h1>${name}</h1>
     </div>
   `;
+  }
+  static HTMLify(array, method) {
+    return array.map(method).join("");
+  }
+
+  static searchGradBy(filter, query) {
+
+    let output = ApiAdapter.allGrads;
+    if (filter !== "all") {
+      output  = ApiAdapter.allGrads.filter(
+        (grad) => grad[filter].toLowerCase() === query.toLowerCase()
+      );
+    }
+    return output;
+  }
+  static renderSearch(array) {
+    this.displayGrads.innerHTML = "";
+    this.displayGrads.innerHTML = array.map(DOM.renderGrad).join("");
+  }
+
+  static makeSearch(pointer) {
+    let filter = pointer.querySelector("#filter");
+    let query = pointer.querySelector("#query");
+    let result = this.searchGradBy(filter.value, query.value);
+    this.renderSearch(result);
+    filter.value = "all";
+    query.value = "";
   }
 }
 
