@@ -10,6 +10,9 @@
     <h1>Flatiron Network</h1>
     <div class="container">
       <div id="grads">
+        <div class="form-container">
+          
+        </div>
         <div class="toolkit">
           <h2>Flatiron Grads</h2>
           <select name="filter" id="filter">
@@ -17,10 +20,10 @@
             <option value="course">Course</option>
             <option value="campus">Campus</option>
           </select>
-          <input type="search" name="query" id="query">
-          <input type="button" value="Search By" id="search">
+          <input type="search" name="query" id="query" />
+          <input type="button" value="Search By" id="search" />
 
-          <button>add new grad</button>
+          <button id="new-grad">add new grad</button>
         </div>
         <div class="grid-container"></div>
       </div>
@@ -40,10 +43,7 @@
       </div>
     </div>
   </body>
-  <script src="index.js"></script>
+  <script type="module" src="index.js" crossorigin="SameSite"></script>
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhzq1NujP1j5j-G3uApbjV8vm0hIQpgFQ"
-
-  ></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhzq1NujP1j5j-G3uApbjV8vm0hIQpgFQ"></script>
 </html>

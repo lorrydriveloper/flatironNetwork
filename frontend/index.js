@@ -1,116 +1,24 @@
-const companies = document.querySelector("#companies");
-const displayCompanies = companies.querySelector(".grid-container");
-const grads = document.querySelector("#grads");
-const info = document.querySelector("#info");
-const displayInfo = info.querySelector(".display-info");
-const displayGrads = grads.querySelector(".grid-container");
-const searchGradButton = document.querySelector("#searchGrad");
+import DOM from "./modules/render.js";
+import ApiAdapter from "./modules/api.js";
 let allGrads = [];
-const URL = "http://localhost:3000/api/v1/";
+
 document.addEventListener("DOMContentLoaded", function () {
-  fetchCompanies();
-  fetchGrads();
+  // ApiAdapter.getRequest('companies');
+  ApiAdapter.fetchGrads();
+  DOM.addListeners()
 });
 
-grads.addEventListener("click", function gradsEvents(event) {
-  if (event.target.id == "search") {
-    makeSearch(this);
-  }
-});
-
-companies.addEventListener('click', function companiesEvents(event) {
-    if(event.target.parentElement.id || event.target.id){
-        let id = event.target.parentElement.id || event.target.id;
-        fetchCompany(id)
-    }
-})
 
 
 
 
 
-function fetchCompanies() {
-  let configurationObject = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    // body: JSON.stringify({ trainer_id: trainerId }),
-  };
-  fetch(URL + "companies", configurationObject)
-    .then((response) => response.json())
-    .then((json) => {
-      displayCompanies.innerHTML += json.map(renderCompany).join("");
-    })
-    .catch((error) => console.log(error.message));
-}
-
-function fetchGrads() {
-  let configurationObject = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    // body: JSON.stringify({ trainer_id: trainerId }),
-  };
-  fetch(URL + "users", configurationObject)
-    .then((response) => response.json())
-    .then((json) => {
-      displayGrads.innerHTML += json.map(renderGrad).join("");
-      allGrads = json;
-      initMap(allGrads)
-    })
-    .catch((error) => console.log(error.message));
-}
-
-function fetchCompany(companySlug) {
-    let configurationObject = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      // body: JSON.stringify({ trainer_id: trainerId }),
-    };
-    fetch(URL + "companies/" + companySlug, configurationObject)
-      .then((response) => response.json())
-      .then((json) => {
-        initMap(json.users);
-        displayInfo.innerHTML = ''
-        displayInfo.innerHTML += json.users.map(renderGrad).join("");
-      })
-      .catch((error) => console.log(error.message));
-}
 
 
 
-function renderGrad({ name, avatar, campus, cohort, course }) {
-  return `
-    <div class='card'>
-      <h1>${name}</h1>
-    </div>
-  `;
-}
 
-function renderCompany({ logo, name, slug, users }) {
-  if (users.length == 0) {
-    return "";
-  }
-  return `
-          <div class="company" id='${slug}'>
-            <img
-              src="${logo}"
-              alt="${slug}-logo"
-            />
-            <div class="company__info">
-              <h3>${name}</h3>
-              <h4>grads working here ${users.length}</h4>
-            </div>
-          </div>
-  `;
-}
+
+
 
 function searchGradBy(filter, query) {
   let output = allGrads;
@@ -137,13 +45,13 @@ function makeSearch(pointer) {
 
 // google Maps
 
-
+var map
 function initMap(allGrads) {
-  let coordinates = { lat: 52.6655976, lng: -2.4558356 };
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: coordinates,
-    zoom:2,
-  });
+    let coordinates = { lat: 52.6655976, lng: -2.4558356 };
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 35, lng: -50},
+      zoom: 3,
+    });
 
   var contentString = `
       <div id="content">
@@ -181,7 +89,7 @@ function initMap(allGrads) {
     let marker = new google.maps.Marker({
         position: { lat: (getRandomInRange(-90,90,7)), lng: (getRandomInRange(-180,180,7)) },
         map: map,
-        title: "Hello World",
+        title: `hello`,
         infowindow: infowindow
       })
       marker.addListener("click", function () {
@@ -197,7 +105,7 @@ function initMap(allGrads) {
   }
 
 }
-
+//  TO DELETE WHEN REAL DATA IS POPULATE
 function getRandomInRange(from, to, fixed) {
     return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
     // .toFixed() returns string, so ' * 1' is a trick to convert to number
