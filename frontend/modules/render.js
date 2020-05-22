@@ -63,9 +63,18 @@ class DOM {
   }
   static renderGrad({ name, avatar, campus, cohort, course }) {
     return `
-    <div class='card'>
-      <h1>${name}</h1>
-    </div>
+        <div class="gradcard">
+            <div class="grad">
+              <img src="${avatar}">
+            </div>
+            <h1>${name}</h1>
+            <ul class="card__info">
+              <li>${course}</li>
+                <span class="hr"></span>
+              <li>${campus}</li>
+              <li>${cohort}</li>
+            </ul>
+        </div>
   `;
   }
   static HTMLify(array, method) {
