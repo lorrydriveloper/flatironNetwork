@@ -14,8 +14,8 @@ class Map {
       });
       let marker = new google.maps.Marker({
         position: {
-          lat: Map.getRandomInRange(-90, 90, 7),
-          lng: Map.getRandomInRange(-180, 180, 7),
+          lat: Map.getRandomInRange(50, 26, 7),
+          lng: Map.getRandomInRange(-124, -65, 7),
         },
         map: map,
         title: grad.name,
@@ -29,6 +29,7 @@ class Map {
     });
     function closeMarkers(map) {
       markers.forEach(function (marker) {
+        map.zoom = 15
         marker.infowindow.close(map, marker);
       });
     }
