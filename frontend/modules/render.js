@@ -1,4 +1,5 @@
 import ApiAdapter from "../modules/api.js";
+import Map from "../modules/map.js";
 
 class DOM {
   static grads = document.querySelector("#grads");
@@ -100,6 +101,7 @@ class DOM {
     let filter = pointer.querySelector("#filter");
     let query = pointer.querySelector("#query");
     let result = this.searchGradBy(filter.value, query.value);
+    Map.init(result)
     this.renderSearch(result);
     filter.value = "all";
     query.value = "";
