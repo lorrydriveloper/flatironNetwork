@@ -7,6 +7,15 @@ class Map {
       zoom: 3,
     });
 
+    let icon = {
+      url:
+        "https://coursereport-s3-production.global.ssl.fastly.net/rich/rich_files/rich_files/999/s200/flatironschool.png", // url
+      scaledSize: new google.maps.Size(20, 20), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(0, 0), // anchor
+    };
+
+
 
     let markers = gradsArray.map((grad) => {
       const infowindow = new google.maps.InfoWindow({
@@ -14,12 +23,13 @@ class Map {
       });
       let marker = new google.maps.Marker({
         position: {
-          lat: Map.getRandomInRange(50, 26, 7),
-          lng: Map.getRandomInRange(-124, -65, 7),
+          lat: grad.latitude,
+          lng: grad.longitude,
         },
         map: map,
         title: grad.name,
         infowindow: infowindow,
+        icon: icon
       });
       marker.addListener("click", function () {
         closeMarkers(map);
@@ -29,16 +39,12 @@ class Map {
     });
     function closeMarkers(map) {
       markers.forEach(function (marker) {
-        map.zoom = 15
+        map.zoom = 10
         marker.infowindow.close(map, marker);
       });
     }
   }
-  //  TO DELETE WHEN REAL DATA IS POPULATE
-  static getRandomInRange(from, to, fixed) {
-    return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
-    // .toFixed() returns string, so ' * 1' is a trick to convert to number
-  }
+
 }
 
 export default Map;
