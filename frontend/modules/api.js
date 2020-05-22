@@ -22,14 +22,14 @@ class ApiAdapter {
     }
   }
 
-  static async postRequest(url,body) {
+  static async postRequest(url,object) {
     let configurationObject = {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(object)
     };
     try {
       const response = await fetch(this.URL + url, configurationObject);
@@ -41,7 +41,7 @@ class ApiAdapter {
   }
 
   static async postNewGrad(object){
-    let grad = await this.postRequest('users', object)
+    let grad = await this.postRequest("users", { user: object });
     console.log(grad)
   }
 

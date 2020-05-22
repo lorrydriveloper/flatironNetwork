@@ -42,7 +42,7 @@ class DOM {
       if (event.target.value == "submit") {
         event.preventDefault();
         let newGradObj = DOM.grabValuesForm(event.target.parentElement.children);
-        console.log(newGradObj)
+         ApiAdapter.postNewGrad(newGradObj);
       }
     });
 
