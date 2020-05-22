@@ -1,4 +1,5 @@
 import DOM from "../modules/render.js";
+import Map from "../modules/map.js";
 
 class ApiAdapter {
   static URL = "http://localhost:3000/api/v1/";
@@ -24,6 +25,7 @@ class ApiAdapter {
   static async fetchGrads() {
     let grads = await this.getRequest("users");
     this.allGrads = grads
+    Map.init(grads)
     DOM.displayGrads.innerHTML += DOM.HTMLify(grads, DOM.renderGrad);
   }
 
@@ -33,6 +35,7 @@ class ApiAdapter {
   }
   static async fetchCompany(id) {
     let company = await this.getRequest(`companies/${id}`);
+    Map.init(company.users)
     DOM.displayInfo.innerHTML = "";
     DOM.displayInfo.innerHTML += DOM.HTMLify(company.users, DOM.renderGrad);
   }
