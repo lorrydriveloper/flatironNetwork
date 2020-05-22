@@ -28,8 +28,8 @@ class DOM {
   }
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
-      event.preventDefault()
-    
+      
+
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
@@ -39,8 +39,10 @@ class DOM {
       if (event.target.className == "close") {
         DOM.toggleForm();
       }
-      if (event.target.value == 'submit') {
-        console.log('hola');
+      if (event.target.value == "submit") {
+        event.preventDefault();
+        let newGradObj = DOM.grabValuesForm(event.target.parentElement.children);
+        console.log(newGradObj)
       }
     });
 
@@ -156,9 +158,12 @@ class DOM {
           return this.optionsBuilder(ApiAdapter.companies, attr);
         } else if (attr == "cohort") {
           return `
-          <label for="start">Select you Cohort:</label>
-          <input type="month" id="cohort" name="cohort"
-            min="2012-01">`;
+            <div class="float-label">
+              <input type="month" id="cohort" name="cohort"
+                min="2012-01">
+               <label for="cohort">Select you Cohort:</label>
+            </div>
+            `;
         } else if (attr == "campus") {
           return this.optionsBuilder(campus, attr);
         } else {
@@ -178,14 +183,28 @@ class DOM {
     return `     
     <div class="float-label">     
     <select name="${attr}" id="${attr}">
-      ${
-        collection.map((c) =>{
-          if(typeof c == 'object') c = c.name
-          return `<option value="${c}">${c}</option>`}).join("")
-
-    }
+      ${collection
+        .map((c) => {
+          let option = "";
+          if (typeof c == "object") {
+            option = `<option value="${c.slug}">${c.name}</option>`;
+          } else {
+            option = `<option value="${c}">${c}</option>`;
+          }
+          return option;
+        })
+        .join("")}
     </select>
     </div>`;
+  }
+
+  static grabValuesForm(nodes) {
+    let postObj = {};
+    for (let i = 0; i < nodes.length - 1; i++) {
+      const element = nodes[i];
+      postObj[element.children[0].name] = element.children[0].value;
+    }
+    return postObj
   }
 }
 

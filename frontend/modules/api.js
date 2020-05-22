@@ -22,6 +22,29 @@ class ApiAdapter {
     }
   }
 
+  static async postRequest(url,body) {
+    let configurationObject = {
+      method: "Post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body)
+    };
+    try {
+      const response = await fetch(this.URL + url, configurationObject);
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      return console.log(error.message);
+    }
+  }
+
+  static async postNewGrad(object){
+    let grad = await this.postRequest('users', object)
+    console.log(grad)
+  }
+
   static async fetchGrads() {
     let grads = await this.getRequest("users");
     this.allGrads = grads;
@@ -31,7 +54,7 @@ class ApiAdapter {
 
   static async fetchCompanies() {
     let companies = await this.getRequest("companies");
-    this.companies = companies
+    this.companies = companies;
     DOM.displayCompanies.innerHTML += DOM.HTMLify(companies, DOM.renderCompany);
   }
   static async fetchCompany(id) {
