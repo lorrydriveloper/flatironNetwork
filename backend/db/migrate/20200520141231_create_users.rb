@@ -9,7 +9,13 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :cohort
       t.string :campus
       t.string :course
-
+      t.string :street
+      t.string :city
+      t.string :postcode
+      t.string :state
+      t.string :country
+      t.float :latitude
+      t.float :longitude
       t.timestamps
     end
   end
