@@ -17,6 +17,8 @@ body {
   text-align: center;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
+
 }
 
 h1 {
@@ -27,13 +29,63 @@ h1 {
 }
 h2 {
   text-transform: uppercase;
-  text-align: center;
-  margin: 10px;
 }
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.grid-container {
+margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, auto));
+    gap: 10px;
+    overflow: auto;
+    height: 380px;
+}
+.toolkit {
+width: 100%;
+position: absolute;
+background-color: #10bc6a;
+top: 0;
+z-index: 5;
+}
+.toolkit #query{
+    width: 50%;
+    height: 50px;
+    border: 2px solid #01cfc7;
+    border-radius: 21px;
+    margin: 10px;
+    outline: none;
+    padding-left: 15%;
+    font-size: 30px;
+    color: #3b51568c;
+}
+.toolkit #filter {
+  outline: none;
+    border: none;
+    position: absolute;
+    font-size: 20px;
+    bottom: 23px;
+    left: 22%;
+    color: #19899d;
+}
+.toolkit #search{
+  position: absolute;
+    font-size: 50px;
+    transform: rotate(190deg);
+    background: none;
+    border: none;
+    outline: none;
+    color: #03cfc6;
+    right: 30%;
+    bottom: 3px;
+    cursor: pointer;
+    width: 70px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+
 
 #grads {
   position: relative;
@@ -42,6 +94,7 @@ h2 {
   background-color: red;
   padding: 5px;
   overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .form-container {
@@ -138,6 +191,7 @@ h2 {
 }
 
 #companies {
+  position: relative;
   overflow-y: auto;
   width: 50vw;
   height: 50vh;
@@ -145,12 +199,7 @@ h2 {
   padding: 5px;
 }
 
-.grid-container {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, auto));
-  gap: 5px;
-}
+
 .company {
   cursor: pointer;
   display: flex;
