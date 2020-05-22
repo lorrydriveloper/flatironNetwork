@@ -49,7 +49,7 @@ h2 {
   left: 0;
   z-index: 5;
 }
-.toolkit input[type='search'] {
+.toolkit input[type="search"] {
   width: 50%;
   height: 50px;
   border: 2px solid #01cfc7;
@@ -86,7 +86,8 @@ h2 {
 }
 .toolkit #new-grad {
   position: absolute;
-}.toolkit #new-company {
+}
+.toolkit #new-company {
   position: absolute;
 }
 
@@ -276,3 +277,13 @@ h2 {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+/* no X on seacht bar */
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
