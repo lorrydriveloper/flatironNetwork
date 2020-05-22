@@ -127,6 +127,9 @@ h2 {
   margin: 0 auto;
   transition: all, 2s;
 }
+.form-container form{
+  background-color: red;
+}
 .reveal {
   height: 95%;
   opacity: 1;

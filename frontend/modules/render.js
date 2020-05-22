@@ -12,6 +12,8 @@ class DOM {
 
   static renderNewGradForm() {
     grads.children[0].innerHTML += '<p class="close">close X</p>';
+    grads.children[0].innerHTML += this.formBuilder();
+
     this.toggleForm();
   }
 
@@ -38,8 +40,8 @@ class DOM {
     });
 
     companies.addEventListener("click", function companiesEvents(event) {
-      if (event.target.parentElement.id || event.target.id) {
-        let id = event.target.parentElement.id || event.target.id;
+      let id = event.target.parentElement.id || event.target.id;
+      if (id) {
         ApiAdapter.fetchCompany(id);
       }
     });
@@ -62,9 +64,9 @@ class DOM {
           </div>
   `;
   }
-  static renderGrad({ name, avatar, campus, cohort, course }) {
+  static renderGrad({ name, avatar, campus, cohort, course, id }) {
     return `
-        <div class="gradcard">
+        <div class="gradcard" id='${id}'>
             <div class="grad">
               <img src="${avatar}">
             </div>
@@ -83,10 +85,9 @@ class DOM {
   }
 
   static searchGradBy(filter, query) {
-
     let output = ApiAdapter.allGrads;
     if (filter !== "all") {
-      output  = ApiAdapter.allGrads.filter(
+      output = ApiAdapter.allGrads.filter(
         (grad) => grad[filter].toLowerCase() === query.toLowerCase()
       );
     }
@@ -101,10 +102,80 @@ class DOM {
     let filter = pointer.querySelector("#filter");
     let query = pointer.querySelector("#query");
     let result = this.searchGradBy(filter.value, query.value);
-    Map.init(result)
+    Map.init(result);
     this.renderSearch(result);
     filter.value = "all";
     query.value = "";
+  }
+
+  static formBuilder() {
+    let html = '<form action="">';
+    let course = [
+      "Software Engineering",
+      "Data Science",
+      "Cybersecurity",
+      "UX/UI Design",
+    ];
+    let campus = [
+      "Austin",
+      "Chicago",
+      "Denver",
+      "Houston",
+      "New York",
+      "San Francisco",
+      "Seattle",
+      "Washington, D.C.",
+      "London",
+      "Online",
+    ];
+
+    let attributes = [
+      "name",
+      "email",
+      "avatar",
+      "cohort",
+      "course",
+      "campus",
+      "company",
+      "street",
+      "city",
+      "postcode",
+      "state",
+      "country",
+    ];
+    html += attributes
+      .map((attr) => {
+        if (attr == "course") {
+          return this.optionsBuilder(course, attr);
+        } else if (attr == "company") {
+          return this.optionsBuilder(ApiAdapter.companies, attr);
+        } else if (attr == "cohort") {
+          return `
+          <label for="start">Select you Cohort:</label>
+          <input type="month" id="cohort" name="cohort"
+            min="2012-01">`;
+        } else if (attr == "campus") {
+          return this.optionsBuilder(campus, attr);
+        } else {
+          return `   
+       <div class="float-label">
+          <input type="text" name="${attr}" required />
+            <label for="${attr}">${attr}</label>
+        </div>
+            `;
+        }
+      })
+      .join("");
+    html += '<input type="submit" value="submit" class="button__add"></form>';
+    return html;
+  }
+  static optionsBuilder(collection, attr) {
+    return `     
+    <div class="float-label">     
+    <select name="${attr}" id="${attr}">
+      ${collection.map((c) => `<option value="${c}">${c}</option>`).join("")}
+    </select>
+    </div>`;
   }
 }
 
