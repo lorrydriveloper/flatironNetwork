@@ -28,6 +28,8 @@ class DOM {
   }
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
+      event.preventDefault()
+    
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
@@ -36,6 +38,9 @@ class DOM {
       }
       if (event.target.className == "close") {
         DOM.toggleForm();
+      }
+      if (event.target.value == 'submit') {
+        console.log('hola');
       }
     });
 
@@ -173,7 +178,12 @@ class DOM {
     return `     
     <div class="float-label">     
     <select name="${attr}" id="${attr}">
-      ${collection.map((c) => `<option value="${c}">${c}</option>`).join("")}
+      ${
+        collection.map((c) =>{
+          if(typeof c == 'object') c = c.name
+          return `<option value="${c}">${c}</option>`}).join("")
+
+    }
     </select>
     </div>`;
   }
