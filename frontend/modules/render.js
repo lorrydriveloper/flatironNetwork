@@ -26,7 +26,7 @@ class DOM {
   }
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
-      if (event.target.id == "search") {
+      if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
       if (event.target.id == "new-grad") {

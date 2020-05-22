@@ -18,7 +18,6 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
-
 }
 
 h1 {
@@ -35,66 +34,67 @@ h2 {
   grid-template-columns: 1fr 1fr;
 }
 .grid-container {
-margin-top: 80px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, auto));
-    gap: 10px;
-    overflow: auto;
-    height: 380px;
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, auto));
+  gap: 10px;
+  overflow: auto;
+  height: calc(100% - 80px);
 }
 .toolkit {
-width: 100%;
-position: absolute;
-background-color: #10bc6a;
-top: 0;
-z-index: 5;
+  width: 100%;
+  position: absolute;
+  background-color: #01cfc7;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
-.toolkit #query{
-    width: 50%;
-    height: 50px;
-    border: 2px solid #01cfc7;
-    border-radius: 21px;
-    margin: 10px;
-    outline: none;
-    padding-left: 15%;
-    font-size: 30px;
-    color: #3b51568c;
+.toolkit input[type='search'] {
+  width: 50%;
+  height: 50px;
+  border: 2px solid #01cfc7;
+  border-radius: 21px;
+  margin: 10px;
+  outline: none;
+  padding-left: 15%;
+  font-size: 30px;
+  color: #3b51568c;
 }
 .toolkit #filter {
   outline: none;
-    border: none;
-    position: absolute;
-    font-size: 20px;
-    bottom: 23px;
-    left: 22%;
-    color: #19899d;
-}
-.toolkit #search{
+  border: none;
   position: absolute;
-    font-size: 50px;
-    transform: rotate(190deg);
-    background: none;
-    border: none;
-    outline: none;
-    color: #03cfc6;
-    right: 30%;
-    bottom: 3px;
-    cursor: pointer;
-    width: 70px;
-    height: 50px;
-    border-radius: 50px;
+  font-size: 20px;
+  bottom: 23px;
+  left: 27%;
+  color: #19899d;
 }
-
-
+.toolkit .button__search {
+  position: absolute;
+  font-size: 50px;
+  transform: rotate(190deg);
+  background: none;
+  border: none;
+  outline: none;
+  color: #03cfc6;
+  right: 25%;
+  bottom: 3px;
+  cursor: pointer;
+  width: 70px;
+  height: 50px;
+  border-radius: 50px;
+}
+.toolkit #new-grad {
+  position: absolute;
+}.toolkit #new-company {
+  position: absolute;
+}
 
 #grads {
   position: relative;
   width: 50vw;
   height: 50vh;
-  background-color: red;
   padding: 5px;
-  overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .form-container {
@@ -146,7 +146,7 @@ z-index: 5;
 }
 
 .grad img {
-    height: auto;
+  height: auto;
   width: 100%;
   background-color: #00d2c8;
   border-radius: 100px;
@@ -198,7 +198,6 @@ z-index: 5;
   background-color: yellow;
   padding: 5px;
 }
-
 
 .company {
   cursor: pointer;
