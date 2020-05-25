@@ -28,8 +28,6 @@ class DOM {
   }
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
-      
-
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
@@ -41,8 +39,10 @@ class DOM {
       }
       if (event.target.value == "submit") {
         event.preventDefault();
-        let newGradObj = DOM.grabValuesForm(event.target.parentElement.children);
-         ApiAdapter.postNewGrad(newGradObj);
+        let newGradObj = DOM.grabValuesForm(
+          event.target.parentElement.children
+        );
+        ApiAdapter.postNewGrad(newGradObj);
       }
     });
 
@@ -149,6 +149,7 @@ class DOM {
       "postcode",
       "state",
       "country",
+      "remote_work",
     ];
     html += attributes
       .map((attr) => {
@@ -166,6 +167,15 @@ class DOM {
             `;
         } else if (attr == "campus") {
           return this.optionsBuilder(campus, attr);
+        } else if (attr == "remote_work") {
+          return `
+            <div class="float-label">
+              <input type="radio" id="Remote" name='remote_work' value="true">
+              <label for="Remote">Working Remotely</label><br>
+              <input type="radio" id="Office" name='remote_work' value="false" checked>
+              <label for="Office">Office Base</label><br>
+            </div>
+            `;
         } else {
           return `   
        <div class="float-label">
@@ -204,7 +214,7 @@ class DOM {
       const element = nodes[i];
       postObj[element.children[0].name] = element.children[0].value;
     }
-    return postObj
+    return postObj;
   }
 }
 
