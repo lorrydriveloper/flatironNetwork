@@ -1,5 +1,6 @@
 import ApiAdapter from "../modules/api.js";
 import Map from "../modules/map.js";
+import Builder from "../modules/builder.js";
 
 class DOM {
   static grads = document.querySelector("#grads");
@@ -41,7 +42,7 @@ class DOM {
       if (event.target.value == "submit") {
         event.preventDefault();
         let newGradObj = DOM.grabValuesForm(
-          event.target.parentElement.children
+          event.target.previousSibling.children
         );
         ApiAdapter.postNewGrad(newGradObj);
       }
@@ -188,7 +189,7 @@ class DOM {
       })
       .join("");
     html +=
-      '<input type="submit" value="submit" class="button__add button__submit"></form>';
+      '</form><input type="submit" value="submit" class="button__add button__submit">';
     return html;
   }
   static optionsBuilder(collection, attr) {
@@ -218,6 +219,21 @@ class DOM {
     }
     return postObj;
   }
+  static renderError(grad){
+        document
+          .querySelector(".form-container")
+          .insertAdjacentHTML("afterbegin", Builder.errors(grad.message));
+        setTimeout(this.deleteErrors, 5000)
+  }
+
+  static deleteErrors(){
+   let errors = document.querySelector(".errors")
+   errors.style.opacity = 0;
+   setTimeout(()=> errors.remove(), 1000)
+
+  }
 }
+
+
 
 export default DOM;

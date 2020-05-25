@@ -37,17 +37,17 @@ class ApiAdapter {
       const json = await response.json();
       return json;
     } catch (error) {
-      return console.log(error);
+      console.log(error);
+      return error  
     }
   }
 
   static async postNewGrad(object){
     let grad = await this.postRequest("users", { user: object });
-    console.log(grad.status)
     if (grad.status == 'error') {
-      console.log(grad.message)
+       DOM.renderError(grad)
     } else {
-     DOM.displayGrads.insertAdjacentHTML(
+      DOM.displayGrads.insertAdjacentHTML(
        "afterbegin",
        DOM.renderGrad(grad)
      );
