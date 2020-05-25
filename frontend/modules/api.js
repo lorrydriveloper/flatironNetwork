@@ -18,7 +18,8 @@ class ApiAdapter {
       const json = await response.json();
       return json;
     } catch (error) {
-      return console.log(error.message);
+      console.log(error.message);
+      return error
     }
   }
 

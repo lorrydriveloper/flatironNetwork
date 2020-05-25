@@ -11,10 +11,10 @@ class DOM {
   static searchGradButton = document.querySelector("#searchGrad");
 
   static renderNewGradForm() {
-    grads.children[0].innerHTML += '<p class="close">close X</p>';
-    grads.children[0].innerHTML += this.formBuilder();
-
+    this.grads.children[0].innerHTML += '<p class="close">close X</p>';
+    this.grads.children[0].innerHTML += this.formBuilder();
     this.toggleForm();
+
   }
 
   static toggleForm() {
@@ -26,6 +26,7 @@ class DOM {
       grads.children[0].innerHTML = "";
     }
   }
+
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
       if (event.target.id == "searchGrad") {
@@ -186,7 +187,8 @@ class DOM {
         }
       })
       .join("");
-    html += '<input type="submit" value="submit" class="button__add"></form>';
+    html +=
+      '<input type="submit" value="submit" class="button__add button__submit"></form>';
     return html;
   }
   static optionsBuilder(collection, attr) {
