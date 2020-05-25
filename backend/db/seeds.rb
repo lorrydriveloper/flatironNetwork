@@ -10,7 +10,6 @@
 User.destroy_all
 Company.destroy_all
 
-
 def findMeAmerica
   while true
     result = Geocoder.search([rand(26.0...50.0), rand(-124.0...-65.0)])
@@ -20,6 +19,7 @@ def findMeAmerica
   end
   result.first
 end
+
 def findMeEurope
   while true
     result = Geocoder.search([rand(36.0...55.0), rand(-10.0...27.0)])
@@ -30,7 +30,17 @@ def findMeEurope
   result.first
 end
 
+def userAvatar
+  rand = rand(1...99)
+  var = Faker::Boolean.boolean(true_ratio: 0.5) ? "women/#{rand}.jpg" : "men/#{rand}.jpg"
+  "https://randomuser.me/api/portraits/#{var}"
+end
+
 companies = [
+  {
+    name: 'Job Hunter',
+    logo: 'https://logopond.com/logos/b3958ca66429b7ca1c5af7d70e95ad78.png'
+  },
   {
     name: 'Google',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/235px-Google_%22G%22_Logo.svg.png'
@@ -77,7 +87,7 @@ Company.all.each do |company|
     User.create(
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      avatar: Faker::Avatar.image,
+      avatar: userAvatar,
       cohort: "#{date.month}/#{date.year}",
       campus: campus[rand(0...campus.size)],
       course: course[rand(0...course.size)],

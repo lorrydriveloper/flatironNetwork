@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_141231) do
 
   create_table "users", force: :cascade do |t|
     t.bigint "company_id", null: false
-    t.string "work_location"
+    t.boolean "remote_work", default: false
     t.string "name"
     t.string "email"
     t.string "avatar"
