@@ -1,50 +1,51 @@
 import DOM from "../modules/render.js";
 
 class Map {
+  static map;
+  static markers;
   static init(gradsArray) {
-    const map = new google.maps.Map(document.getElementById("map"), {
+    this.map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: 35, lng: -50 },
       zoom: 3,
     });
 
+    this.markers = gradsArray.map(this.createMarker);
+
+  }
+
+  static closeMarkers(map, markers) {
+    markers.forEach(function (marker) {
+      map.zoom = 10;
+      marker.infowindow.close(map, marker);
+    });
+  }
+  static createMarker(grad) {
     let icon = {
       url:
         "https://coursereport-s3-production.global.ssl.fastly.net/rich/rich_files/rich_files/999/s200/flatironschool.png", // url
-      scaledSize: new google.maps.Size(20, 20), // scaled size
+      scaledSize: new google.maps.Size(18, 18), // scaled size
       origin: new google.maps.Point(0, 0), // origin
       anchor: new google.maps.Point(0, 0), // anchor
     };
-
-
-
-    let markers = gradsArray.map((grad) => {
-      const infowindow = new google.maps.InfoWindow({
-        content: DOM.renderGrad(grad),
-      });
-      let marker = new google.maps.Marker({
-        position: {
-          lat: grad.latitude,
-          lng: grad.longitude,
-        },
-        map: map,
-        title: grad.name,
-        infowindow: infowindow,
-        icon: icon
-      });
-      marker.addListener("click", function () {
-        closeMarkers(map);
-        infowindow.open(map, marker);
-      });
-      return marker;
+    const infowindow = new google.maps.InfoWindow({
+      content: DOM.renderGrad(grad),
     });
-    function closeMarkers(map) {
-      markers.forEach(function (marker) {
-        map.zoom = 10
-        marker.infowindow.close(map, marker);
-      });
-    }
+    let marker = new google.maps.Marker({
+      position: {
+        lat: grad.latitude,
+        lng: grad.longitude,
+      },
+      map: Map.map,
+      title: grad.name,
+      infowindow: infowindow,
+      icon: icon,
+    });
+    marker.addListener("click", function () {
+      Map.closeMarkers(this.map, Map.markers);
+      infowindow.open(this.map, marker);
+    });
+    return marker;
   }
-
 }
 
 export default Map;
