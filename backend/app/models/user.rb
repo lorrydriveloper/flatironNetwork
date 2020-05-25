@@ -9,10 +9,6 @@ class User < ApplicationRecord
   validates :street, :city, :postcode, :country, presence: true
 
   def address
-    if country == 'United Stated Of America'
-      [street, city, postcode, state, country].compact.join(', ')
-    else
-      [street, city, postcode, country].compact.join(', ')
-    end
+     [street, city, postcode, state, country].compact.join(', ')
   end
 end
