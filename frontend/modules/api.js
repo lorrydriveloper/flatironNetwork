@@ -36,13 +36,23 @@ class ApiAdapter {
       const json = await response.json();
       return json;
     } catch (error) {
-      return console.log(error.message);
+      return console.log(error);
     }
   }
 
   static async postNewGrad(object){
     let grad = await this.postRequest("users", { user: object });
-    console.log(grad)
+    console.log(grad.status)
+    if (grad.status == 'error') {
+      console.log(grad.message)
+    } else {
+     DOM.displayGrads.insertAdjacentHTML(
+       "afterbegin",
+       DOM.renderGrad(grad)
+     );
+     DOM.toggleForm()
+     Map.createMarker(grad)
+    }
   }
 
   static async fetchGrads() {
