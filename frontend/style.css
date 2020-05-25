@@ -19,6 +19,17 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+.errors {
+  position: absolute;
+  width: 90%;
+  border-radius: 10px;
+  margin-left: 50%;
+  transform: translatex(-50%);
+  background-color: red;
+  font-size: 20px;
+  transition: all, 1s;
+  z-index: 50;
+}
 
 h1 {
   color: aqua;
@@ -108,7 +119,7 @@ h2 {
 }
 .button__submit {
   right: 110px;
-  bottom: 0;
+  bottom: 20px;
   width: 250px;
   box-shadow: 0 2px 10px 2px rgb(16, 206, 187);
 }
@@ -150,7 +161,6 @@ h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   opacity: inherit;
-  transition: all, 1.5s;
 }
 
 .form-container form input[type="radio"] {
@@ -163,13 +173,14 @@ h2 {
 }
 .float-label input[name="remote_work"] + label {
     cursor: pointer;
+    display: block;
   background-color: grey;
   padding: 10px;
-  bottom: -10px;
+  bottom: -30px;
   border-radius: 10px 0 0 10px;
 }
 .float-label input[name="remote_work"]:nth-last-of-type(2) + label {
-  left: 205px;
+  margin-left: 105px;
   border-radius: 0 10px 10px 0;
 }
 .float-label input[name="remote_work"]:checked + label {
@@ -182,7 +193,7 @@ h2 {
   font-weight: 800;
   font-size: 20px;
   bottom: 5px;
-  left: 100px;
+  left: 22%;
   color: grey;
   transition: all, 0.5s;
 }
