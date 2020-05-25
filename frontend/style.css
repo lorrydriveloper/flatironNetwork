@@ -106,12 +106,19 @@ h2 {
   transform: translateY(1px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
 }
+.button__submit{
+    right: 195px;
+    bottom: 25px;
+}
 
 #grads {
   position: relative;
   width: 50vw;
   height: 50vh;
   padding: 5px;
+  background-image: url("https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/92795437_2642209025885358_157788882182602752_o.png?_nc_cat=101&_nc_sid=b9115d&_nc_oc=AQkwp8G-eUbVPmgmFVFZ1hHNFNmdtf2x320ZPxkEon6oUYDBUHfRziLDiwHhv7bX9xU&_nc_ht=scontent-lhr8-1.xx&oh=c61a131cc30a025525a7e3cd3479bf5e&oe=5EF25352");
+  background-position: center;
+  background-size: cover;
 }
 
 .form-container {
@@ -125,12 +132,46 @@ h2 {
   z-index: 10;
   border-radius: 10px;
   margin: 0 auto;
-  transition: all, 2s;
+  transition: all, 1s;
 }
-.form-container form{
+.form-container form {
+  height: inherit;
+  padding: 15px;
+  position: relative;
   background-color: red;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: inherit;
+  transition: all, 1.5s;
 }
-.reveal {
+.float-label input {
+    border: none;
+    height: 25px;
+    width: 65%;
+    margin-top: 30px;
+    /* border: 2px solid #01cfc7; */
+    border-radius: 21px;
+    outline: none;
+    padding-left: 10px;
+    font-size: 20px;    
+}
+
+.float-label input:active, 
+.float-label input:valid,
+.float-label input:focus {
+  border: 2px solid #01cfc7;
+}
+
+.form-container form input[type="radio"] {
+  display: none;
+}
+.float-label {
+  position: relative;
+  background-color: purple;
+  border: 1px yellow solid;
+  height: 60px;
+}
+#grads .reveal {
   height: 95%;
   opacity: 1;
 }
@@ -140,6 +181,7 @@ h2 {
   right: 20px;
   top: 20px;
   cursor: pointer;
+  z-index: 50;
 }
 
 /* Grads card */
