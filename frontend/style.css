@@ -106,10 +106,19 @@ h2 {
   transform: translateY(1px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
 }
-.button__submit{
-    right: 195px;
-    bottom: 25px;
+.button__submit {
+  right: 110px;
+  bottom: 0;
+  width: 250px;
+  box-shadow: 0 2px 10px 2px rgb(16, 206, 187);
 }
+.button__submit:hover {
+  box-shadow: 1px 5px 10px 2px rgb(16, 206, 187);
+}
+.button__submit:active {
+  box-shadow: 0 3px 10px  rgba(16, 206, 187, 0.849);
+}
+
 
 #grads {
   position: relative;
@@ -138,32 +147,56 @@ h2 {
   height: inherit;
   padding: 15px;
   position: relative;
-  background-color: red;
   display: grid;
   grid-template-columns: 1fr 1fr;
   opacity: inherit;
   transition: all, 1.5s;
 }
 
+.form-container form input[type="radio"] {
+  display: none;
+}
+
+.float-label {
+  position: relative;
+  height: 60px;
+}
+.float-label input[name="remote_work"] + label {
+    cursor: pointer;
+  background-color: grey;
+  padding: 10px;
+  bottom: -10px;
+  border-radius: 10px 0 0 10px;
+}
+.float-label input[name="remote_work"]:nth-last-of-type(2) + label {
+  left: 205px;
+  border-radius: 0 10px 10px 0;
+}
+.float-label input[name="remote_work"]:checked + label {
+  background-color: #03cfc6;
+  color: grey;
+}
+
 .float-label label {
   position: absolute;
   font-weight: 800;
   font-size: 20px;
-  bottom: 3px;
+  bottom: 5px;
   left: 100px;
   color: grey;
+  transition: all, 0.5s;
 }
 
 .float-label input {
-    border: none;
-    height: 25px;
-    width: 65%;
-    margin-top: 30px;
-    border-radius: 21px;
-    outline: none;
-    padding-left: 10px;
-    font-size: 20px;    
-    color: grey;
+  border: none;
+  height: 25px;
+  width: 65%;
+  margin-top: 30px;
+  border-radius: 21px;
+  outline: none;
+  padding-left: 10px;
+  font-size: 20px;
+  color: grey;
 }
 
 .float-label input:valid,
@@ -173,23 +206,27 @@ h2 {
 
 .float-label input:focus + label,
 .float-label input:valid + label {
-    text-transform: uppercase;
-    transform: translate(-10px, -25px);
-    font-size: 15px;
-    color: #01cfc7;
+  text-transform: uppercase;
+  transform: translate(-10px, -25px);
+  font-size: 15px;
+  color: #01cfc7;
 }
 
-.form-container form input[type="radio"] {
-  display: none;
+.float-label select {
+  border: none;
+  height: 25px;
+  width: 65%;
+  margin-top: 30px;
+  border-radius: 21px;
+  outline: none;
+  padding-left: 10px;
+  font-size: 20px;
+  color: grey;
 }
-.float-label {
-  position: relative;
-  background-color: purple;
-  border: 1px yellow solid;
-  height: 60px;
-}
+
+
 #grads .reveal {
-  height: 95%;
+  height: 97%;
   opacity: 1;
 }
 .close {
@@ -338,7 +375,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -346,9 +383,9 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  
   -webkit-text-fill-color: grey;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #fff inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
   font-weight: 800;
   font-size: 16px;
