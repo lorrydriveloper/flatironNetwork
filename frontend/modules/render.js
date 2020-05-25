@@ -1,6 +1,6 @@
 import ApiAdapter from "../modules/api.js";
 import Map from "../modules/map.js";
-import Builder from "../modules/builder.js";
+import HTMLBuilder from "../modules/HTMLbuilder.js";
 
 class DOM {
   static grads = document.querySelector("#grads");
@@ -196,6 +196,7 @@ class DOM {
     return `     
     <div class="float-label">     
     <select name="${attr}" id="${attr}">
+      <option>select you ${attr}</option>
       ${collection
         .map((c) => {
           let option = "";
@@ -222,7 +223,7 @@ class DOM {
   static renderError(grad){
         document
           .querySelector(".form-container")
-          .insertAdjacentHTML("afterbegin", Builder.errors(grad.message));
+          .insertAdjacentHTML("afterbegin", HTMLBuilder.errors(grad.message));
         setTimeout(this.deleteErrors, 5000)
   }
 
