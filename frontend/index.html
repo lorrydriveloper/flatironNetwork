@@ -24,7 +24,7 @@
             <option value="course">Course</option>
             <option value="campus">Campus</option>
           </select>
-          <input type="search" name="query" id="query" autocomplete="off" />
+          <input type="search" name="query" id="query" autocomplete="off" class='search__bar' />
           <input type="button" value='&#9740' id="searchGrad" class="button__search" />
           <button id="new-grad" class="button__add">add new grad</button>
         </div>
@@ -33,9 +33,10 @@
       <section id="companies">
         <div class="toolkit">
           <h2>companies</h2>
-          <input type="search" name="search" />
+          <input class='search__bar' list="companies"  />
           <input type="submit" value="&#9740" class="button__search" />
           <button class="button__add">add new company</button>
+
         </div>
         <div class="grid-container"></div>
       </section>
