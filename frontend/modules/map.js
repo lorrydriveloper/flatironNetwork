@@ -15,7 +15,7 @@ class Map {
 
   static closeMarkers(map, markers) {
     markers.forEach(function (marker) {
-      map.zoom = 10;
+      map.zoom = 7;
       marker.infowindow.close(map, marker);
     });
   }
