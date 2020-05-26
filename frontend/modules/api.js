@@ -44,7 +44,8 @@ class ApiAdapter {
 
   static async postNewGrad(object){
     let grad = await this.postRequest("users", { user: object });
-    if (grad.status == 'error') {
+    console.log(grad)
+    if (grad.error) {
        DOM.renderError(grad)
     } else {
       DOM.displayGrads.insertAdjacentHTML(
