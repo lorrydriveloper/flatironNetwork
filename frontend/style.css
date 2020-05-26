@@ -297,6 +297,9 @@ h2 {
   background-color: yellow;
   padding: 5px;
 }
+#companies .search__bar{
+  padding-left: 30px;
+}
 
 .company {
   cursor: pointer;
