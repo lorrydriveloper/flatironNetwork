@@ -18,7 +18,7 @@
           
         </div>
         <div class="toolkit">
-          <h2>Flatiron Grads</h2>
+          <label for="query"><h2>Flatiron Grads</h2> </label>
           <select name="filter" id="filter">
             <option value="all">All</option>
             <option value="course">Course</option>
@@ -32,11 +32,10 @@
       </section>
       <section id="companies">
         <div class="toolkit">
-          <h2>companies</h2>
-          <input class='search__bar' list="companies"  />
+          <label for="companies_searchbar"><h2>companies</h2></label>
+          <input class='search__bar' list="companies__list" id="companies_searchbar" />
           <input type="submit" value="&#9740" class="button__search" />
           <button class="button__add">add new company</button>
-
         </div>
         <div class="grid-container"></div>
       </section>
