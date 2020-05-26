@@ -1,5 +1,6 @@
 import DOM from "../modules/render.js";
 import Map from "../modules/map.js";
+import HTMLBuilder from "./HTMLbuilder.js";
 
 class ApiAdapter {
   static URL = "http://localhost:3000/api/v1/";
@@ -65,9 +66,10 @@ class ApiAdapter {
   }
 
   static async fetchCompanies() {
-    let companies = await this.getRequest("companies");
-    this.companies = companies;
+    let companies = (this.companies = await this.getRequest("companies"));
     DOM.displayCompanies.innerHTML += DOM.HTMLify(companies, DOM.renderCompany);
+    // adding datalist companies__list to toolkit
+    DOM.displayCompanies.previousElementSibling.innerHTML+= HTMLBuilder.datalist(companies)
   }
   static async fetchCompany(id) {
     let company = await this.getRequest(`companies/${id}`);
