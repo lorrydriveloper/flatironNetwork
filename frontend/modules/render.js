@@ -32,13 +32,13 @@ class DOM {
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
-      if (event.target.id == "new-grad") {
+      else if (event.target.id == "new-grad") {
         DOM.renderNewGradForm();
       }
-      if (event.target.className == "close") {
+      else if (event.target.className == "close") {
         DOM.toggleForm();
       }
-      if (event.target.value == "submit") {
+      else if (event.target.value == "submit") {
         event.preventDefault();
         console.log(event.target);
         let newGradObj = DOM.grabValuesForm(
@@ -49,14 +49,14 @@ class DOM {
     });
 
     companies.addEventListener("click", function companiesEvents(event) {
+      console.log(event.target.tagName);
       if (event.target.className == "button__search") {
         DOM.searchCompany(event);
       }
-      // let id = event.target.parentElement.className || event.target.id;
-      // console.log(id)
-      // if (id) {
-      //   ApiAdapter.fetchCompany(id);
-      // }
+      if (event.target.tagName == "LI") {
+        let id = event.target.parentElement.id;
+        ApiAdapter.fetchCompany(id);
+      }
     });
   }
 
@@ -65,18 +65,30 @@ class DOM {
       return "";
     }
     return `
-          <div class="company" id='${slug}'>
+          <div class="company">
             <img
               src="${logo}"
               alt="${slug}-logo"
             />
-            <div class="company__info">
-              <h3>${name}</h3>
-              <h4>grads working here ${users.length}</h4>
+            <div class="company__info" >
+              <ul id="${slug}">
+                <li>${name}</li>
+                <li>${users.length} grads working here as:</li>
+                  ${helper(users)}
+              </ul>
+              
+              
             </div>
           </div>
   `;
+    function helper(users){
+      let myArray = users.map(u => u.course)
+      return [...new Set(myArray)].map(course => `<li>${course}</li>`).join('')
+      
+    }
+
   }
+
   static renderGrad({ name, avatar, campus, cohort, course, id }) {
     return `
         <div class="gradcard" id='${id}'>
