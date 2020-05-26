@@ -401,3 +401,7 @@ select:-webkit-autofill:focus {
   font-weight: 800;
   font-size: 16px;
 }
+
+#companies input::-webkit-calendar-picker-indicator {
+  display: none;
+}
