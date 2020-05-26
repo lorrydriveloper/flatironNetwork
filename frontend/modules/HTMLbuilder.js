@@ -15,7 +15,7 @@ class HTMLBuilder {
     return `
       <datalist id="companies__list">
          ${collection
-           .map((c) => `<option data-slug=${c.slug} value="${c.name}"></option>`)
+           .map((c) => `<option value="${c.name}"></option>`)
            .join("")}
       </datalist>
     `;
@@ -62,7 +62,7 @@ class HTMLBuilder {
         if (attr == "course") {
           return this.optionsBuilder(course, attr);
         } else if (attr == "company") {
-          return this.optionsBuilder(ApiAdapter.companies, attr);
+          return this.optionsBuilder(ApiAdapter.Allcompanies, attr);
         } else if (attr == "cohort") {
           return `
             <div class="float-label">
