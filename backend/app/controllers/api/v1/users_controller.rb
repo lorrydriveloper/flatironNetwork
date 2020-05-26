@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: user, except: %i[created_at updated_at]
     else
-      render json: { status: 'error', message: "#{user.errors.full_messages.join(',')} " }, status: :bad_request
+      render json: { error: 'Unable to save entity', message: "#{user.errors.full_messages.join(', ')} " }, status: :bad_request
     end
   end
 

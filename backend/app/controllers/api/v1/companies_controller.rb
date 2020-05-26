@@ -11,7 +11,7 @@ class Api::V1::CompaniesController < ApplicationController
     if company
       render json: company, except: %i[created_at updated_at], include: :users
     else
-      render json: { status: 'error', message: "Can't find " }, status: :bad_request
+      render json: { error: "Can't find ", message: "Sorry, we can't find that company in our records" }, status: :bad_request
     end
   end
 
@@ -28,6 +28,9 @@ class Api::V1::CompaniesController < ApplicationController
   end
 
   def update
+    
+
+
     company = Company.friendly.find(params[:id])
     if company.update_attributes(company_params)
       render json: company, except: %i[created_at updated_at]
