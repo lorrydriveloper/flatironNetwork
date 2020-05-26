@@ -60,7 +60,7 @@ h2 {
   left: 0;
   z-index: 5;
 }
-.toolkit input[type="search"] {
+.toolkit .search__bar {
   width: 50%;
   height: 50px;
   border: 2px solid #01cfc7;
