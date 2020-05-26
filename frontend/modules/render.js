@@ -40,7 +40,7 @@ class DOM {
       }
       if (event.target.value == "submit") {
         event.preventDefault();
-        console.log(event.target)
+        console.log(event.target);
         let newGradObj = DOM.grabValuesForm(
           event.target.previousSibling.children
         );
@@ -49,10 +49,14 @@ class DOM {
     });
 
     companies.addEventListener("click", function companiesEvents(event) {
-      let id = event.target.parentElement.id || event.target.id;
-      if (id) {
-        ApiAdapter.fetchCompany(id);
+      if (event.target.className == "button__search") {
+        DOM.searchCompany(event);
       }
+      // let id = event.target.parentElement.className || event.target.id;
+      // console.log(id)
+      // if (id) {
+      //   ApiAdapter.fetchCompany(id);
+      // }
     });
   }
 
@@ -117,8 +121,6 @@ class DOM {
     query.value = "";
   }
 
-  
-
   static grabValuesForm(nodes) {
     let postObj = {};
     for (let i = 0; i < nodes.length - 1; i++) {
@@ -139,8 +141,20 @@ class DOM {
     errors.style.opacity = 0;
     setTimeout(() => errors.remove(), 1000);
   }
+
+  static searchCompany(event) {
+    let value = event.target.previousElementSibling.value;
+    let company = ApiAdapter.Allcompanies.find((e) => e.name == value);
+    this.displayCompanies.innerHTML = "";
+    if (company) {
+      this.displayCompanies.innerHTML += this.renderCompany(company);
+    } else {
+      this.displayCompanies.innerHTML += this.HTMLify(
+        ApiAdapter.Allcompanies,
+        this.renderCompany
+      );
+    }
+  }
 }
-
-
 
 export default DOM;

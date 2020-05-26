@@ -13,9 +13,9 @@ class HTMLBuilder {
 
   static datalist(collection) {
     return `
-      <datalist id="companies">
+      <datalist id="companies__list">
          ${collection
-           .map((c) => `<option value="${c.slug}">${c.name}</option>`)
+           .map((c) => `<option data-slug=${c.slug} value="${c.name}"></option>`)
            .join("")}
       </datalist>
     `;
