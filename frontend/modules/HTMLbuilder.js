@@ -120,12 +120,3 @@ class HTMLBuilder {
 
 
 export default HTMLBuilder
-
-
-// <datalist id="ice-cream-flavors">
-//     <option value="Chocolate">
-//     <option value="Coconut">
-//     <option value="Mint">
-//     <option value="Strawberry">
-//     <option value="Vanilla">
-// </datalist>

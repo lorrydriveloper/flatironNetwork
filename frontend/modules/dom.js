@@ -1,6 +1,6 @@
-import ApiAdapter from "../modules/api.js";
-import Map from "../modules/map.js";
-import HTMLBuilder from "../modules/HTMLbuilder.js";
+import ApiAdapter from "./api.js";
+import Map from "./map.js";
+import HTMLBuilder from "./HTMLbuilder.js";
 
 class DOM {
   static grads = document.querySelector("#grads");

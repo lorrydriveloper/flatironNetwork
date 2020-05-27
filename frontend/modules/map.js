@@ -1,4 +1,4 @@
-import DOM from "../modules/render.js";
+import DOM from "../modules/dom.js";
 
 class Map {
   static map;
