@@ -68,7 +68,7 @@ class DOM {
         let companyObj = DOM.grabValuesForm(
           event.target.parentElement.children
         );
-        console.log(companyObj);
+        ApiAdapter.postNewCompany(companyObj);
       }
     });
   }
@@ -105,10 +105,10 @@ class DOM {
     }
     return postObj;
   }
-  static renderError(grad) {
-    document
+  static renderError(object, section) {
+    section
       .querySelector(".form-container")
-      .insertAdjacentHTML("afterbegin", HTMLBuilder.errors(grad.message));
+      .insertAdjacentHTML("afterbegin", HTMLBuilder.errors(object.message));
     setTimeout(this.deleteErrors, 5000);
   }
 
