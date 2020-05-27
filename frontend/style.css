@@ -290,10 +290,12 @@ h2 {
 #companies {
   position: relative;
   overflow-y: auto;
+  overflow-x: hidden;
   width: 50vw;
   height: 50vh;
-  background-color: yellow;
   padding: 5px;
+  background-image: url('https://image.freepik.com/free-vector/shiny-sky-background-with-bright-sun-wave_1017-19637.jpg');
+  background-size: cover;
 }
 #companies .search__bar {
   padding-left: 30px;
@@ -347,7 +349,11 @@ h2 {
 .company__info ul li:first-child {
   text-transform: uppercase;
   font-weight: 800;
-
+  color:black;
+}
+.company__info ul li span {
+  font-weight: 800;
+  font-size: 25px;
 }
 
 

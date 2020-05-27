@@ -31,7 +31,7 @@ class HTMLBuilder {
             <div class="company__info" >
               <ul id="${slug}">
                 <li>${name}</li>
-                <li>${users.length} grads working here as:</li>
+                <li><span>${users.length} grads</span> working here as:</li>
                   ${helper(users)}
               </ul>
               
