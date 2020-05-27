@@ -1,6 +1,9 @@
 import ApiAdapter from "../modules/api.js";
 
 class HTMLBuilder {
+  static HTMLify(array, method) {
+    return array.map(method).join("");
+  }
   static gradCard({ name, avatar, campus, cohort, course, id }) {
     return `
         <div class="gradcard" id='${id}'>
@@ -69,7 +72,7 @@ class HTMLBuilder {
     `;
   }
 
-  static formBuilder() {
+  static gradsFormBuilder() {
     let html = '<form action="">';
     let course = [
       "Software Engineering",
@@ -163,6 +166,21 @@ class HTMLBuilder {
         .join("")}
     </select>
     </div>`;
+  }
+  static companiesFormBuilder(){
+    return `
+    <form>
+      <div class="float-label">
+        <input type="text" id="name" name="name" >
+        <label for="name">What your Company name</label>
+      </div>
+      <div class="float-label">
+        <input type="text" id="logo" name="logo" >
+        <label for="logo">Paste your company logo Url</label>
+      </div>
+      <input type="submit" value="submit" class="button__add button__submit">
+    </form>
+    `;
   }
 }
 

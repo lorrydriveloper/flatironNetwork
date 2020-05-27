@@ -62,12 +62,12 @@ class ApiAdapter {
     let grads = await this.getRequest("users");
     this.allGrads = grads;
     Map.init(grads);
-    DOM.displayGrads.innerHTML += DOM.HTMLify(grads, HTMLBuilder.gradCard);
+    DOM.displayGrads.innerHTML += HTMLBuilder.HTMLify(grads, HTMLBuilder.gradCard);
   }
 
   static async fetchCompanies() {
     let companies = (this.Allcompanies = await this.getRequest("companies"));
-    DOM.displayCompanies.innerHTML += DOM.HTMLify(companies, HTMLBuilder.companyDiv);
+    DOM.displayCompanies.innerHTML += HTMLBuilder.HTMLify(companies, HTMLBuilder.companyDiv);
     // adding datalist companie to toolkit
     DOM.displayCompanies.previousElementSibling.innerHTML+= HTMLBuilder.datalist(companies)
   }
@@ -75,7 +75,10 @@ class ApiAdapter {
     let company = await this.getRequest(`companies/${id}`);
     Map.init(company.users);
     DOM.displayInfo.innerHTML = "";
-    DOM.displayInfo.innerHTML += DOM.HTMLify(company.users, HTMLBuilder.gradCard);
+    DOM.displayInfo.innerHTML += HTMLBuilder.HTMLify(
+      company.users,
+      HTMLBuilder.gradCard
+    );
   }
 }
 

@@ -10,43 +10,41 @@ class DOM {
   static displayInfo = info.querySelector(".display-info");
   static displayGrads = grads.querySelector(".grid-container");
   static searchGradButton = document.querySelector("#searchGrad");
-  static query = document.querySelector('#query')
+  static query = document.querySelector("#query");
 
   static renderNewGradForm() {
     this.grads.children[0].innerHTML += '<p class="close">close X</p>';
-    this.grads.children[0].innerHTML += HTMLBuilder.formBuilder();
-    this.toggleForm();
+    this.grads.children[0].innerHTML += HTMLBuilder.gradsFormBuilder();
+    this.toggleForm(this.grads);
+  }
+  static renderCompaniesForm() {
+    this.companies.children[0].innerHTML += '<p class="close">close X</p>';
+    this.companies.children[0].innerHTML += HTMLBuilder.companiesFormBuilder();
+    this.toggleForm(this.companies);
   }
 
-  static toggleForm() {
-    grads.children[0].classList.toggle("reveal");
-    if (grads.children[0].classList.contains("reveal")) {
-      grads.style.overflow = "hidden";
-    } else {
-      grads.style.overflow = "auto";
-      grads.children[0].innerHTML = "";
+  static toggleForm(formContainer) {
+    formContainer.children[0].classList.toggle("reveal");
+    if (!formContainer.children[0].classList.contains("reveal")) {
+      formContainer.children[0].innerHTML = "";
     }
   }
 
   static addListeners() {
-
-    query.addEventListener('keydown', function enterEvent(event){
+    query.addEventListener("keydown", function enterEvent(event) {
       if (event.keyCode == 13) {
-        DOM.makeSearch(grads)
+        DOM.makeSearch(grads);
       }
-    })
+    });
 
     grads.addEventListener("click", function gradsEvents(event) {
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
-      }
-      else if (event.target.id == "new-grad") {
+      } else if (event.target.id == "new-grad") {
         DOM.renderNewGradForm();
-      }
-      else if (event.target.className == "close") {
-        DOM.toggleForm();
-      }
-      else if (event.target.value == "submit") {
+      } else if (event.target.className == "close") {
+        DOM.toggleForm(this);
+      } else if (event.target.value == "submit") {
         event.preventDefault();
         let newGradObj = DOM.grabValuesForm(
           event.target.previousSibling.children
@@ -58,16 +56,21 @@ class DOM {
     companies.addEventListener("click", function companiesEvents(event) {
       if (event.target.className == "button__search") {
         DOM.searchCompany(event);
-      }
-      if (event.target.tagName == "LI") {
+      } else if (event.target.tagName == "LI") {
         let id = event.target.parentElement.id;
         ApiAdapter.fetchCompany(id);
+      } else if (event.target.className == "button__add") {
+        DOM.renderCompaniesForm();
+      } else if (event.target.className == "close") {
+        DOM.toggleForm(this);
+      } else if (event.target.value == "submit") {
+        event.preventDefault();
+        let companyObj = DOM.grabValuesForm(
+          event.target.parentElement.children
+        );
+        console.log(companyObj);
       }
     });
-  }
-
-  static HTMLify(array, method) {
-    return array.map(method).join("");
   }
 
   static searchGradBy(filter, query) {
