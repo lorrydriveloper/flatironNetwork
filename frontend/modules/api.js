@@ -6,6 +6,7 @@ class ApiAdapter {
   static URL = "http://localhost:3000/api/v1/";
   static allGrads = [];
   static allCompanies = [];
+
   static async getRequest(url) {
     let configurationObject = {
       method: "GET",
@@ -45,16 +46,25 @@ class ApiAdapter {
 
   static async postNewGrad(object){
     let grad = await this.postRequest("users", { user: object });
-    console.log(grad)
     if (grad.error) {
-       DOM.renderError(grad)
+       DOM.renderError(grad, DOM.grads)
     } else {
       DOM.displayGrads.insertAdjacentHTML(
        "afterbegin",
        HTMLBuilder.gradCard(grad)
      );
-     DOM.toggleForm()
+     DOM.toggleForm(DOM.grads);
      Map.createMarker(grad)
+    }
+  }
+  static async postNewCompany(object){
+    let company = await this.postRequest('companies', {company: object})
+    if (company.error) {
+      DOM.renderError(company, DOM.companies);
+    } else {
+      this.Allcompanies.push(company)
+      DOM.displayCompanies.insertAdjacentHTML('afterbegin', HTMLBuilder.companyDiv(company))
+      DOM.toggleForm(DOM.companies);
     }
   }
 
