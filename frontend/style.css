@@ -32,7 +32,7 @@ body {
 }
 
 h1 {
-  color:black;
+  color: black;
   background-color: #01cfc7;
   font-size: 50px;
   text-align: center;
@@ -294,7 +294,7 @@ h2 {
   width: 50vw;
   height: 50vh;
   padding: 5px;
-  background-image: url('https://image.freepik.com/free-vector/shiny-sky-background-with-bright-sun-wave_1017-19637.jpg');
+  background-image: url("https://image.freepik.com/free-vector/shiny-sky-background-with-bright-sun-wave_1017-19637.jpg");
   background-size: cover;
 }
 #companies .search__bar {
@@ -309,7 +309,8 @@ h2 {
   width: 250px;
   height: 250px;
   border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25),
+    -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
   transition: 0.4s;
 }
 .company:hover .company__info {
@@ -323,14 +324,14 @@ h2 {
   border-radius: 40px;
   margin-top: 50%;
   margin-left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 .company__info {
   width: 0;
   height: 100%;
   position: absolute;
   opacity: 0;
-  transition: all,1s;
+  transition: all, 1s;
 }
 .company__info ul {
   height: 100%;
@@ -338,7 +339,6 @@ h2 {
   border-radius: 40px;
   list-style: none;
   padding: 10px;
- 
 }
 .company__info ul li {
   cursor: pointer;
@@ -349,13 +349,12 @@ h2 {
 .company__info ul li:first-child {
   text-transform: uppercase;
   font-weight: 800;
-  color:black;
+  color: black;
 }
 .company__info ul li span {
   font-weight: 800;
   font-size: 25px;
 }
-
 
 #map {
   padding: 50px;
@@ -366,11 +365,15 @@ h2 {
 #info {
   height: 50vh;
   width: 50vw;
-  background-color: yellowgreen;
+  background: url("https://scontent-lhr8-1.xx.fbcdn.net/v/t1.0-9/92462273_2642209039218690_2616637696134610944_o.png?_nc_cat=104&_nc_sid=b9115d&_nc_oc=AQkNIJ0B7gMjn6AUwx9-ZNEeZrkfqYEQCUb6F4ECBT_JrWGrNroh-_1pymOG878lPAc&_nc_ht=scontent-lhr8-1.xx&oh=10e129fab0a391493c64fe3f981b3046&oe=5EF2B578");
+  background-position: center;
+  background-size: cover;
 }
 .display-info {
   height: 90%;
   overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* custom scrollbar */
