@@ -1,4 +1,4 @@
-import DOM from "../modules/dom.js";
+import HTMLBuilder from "./HTMLbuilder.js";
 
 class Map {
   static map;
@@ -28,7 +28,7 @@ class Map {
       anchor: new google.maps.Point(0, 0), // anchor
     };
     const infowindow = new google.maps.InfoWindow({
-      content: DOM.renderGrad(grad),
+      content: HTMLBuilder.gradCard(grad),
     });
     let marker = new google.maps.Marker({
       position: {

@@ -29,6 +29,7 @@ class DOM {
 
   static addListeners() {
     grads.addEventListener("click", function gradsEvents(event) {
+      console.log(event)
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
@@ -49,7 +50,6 @@ class DOM {
     });
 
     companies.addEventListener("click", function companiesEvents(event) {
-      console.log(event.target.tagName);
       if (event.target.className == "button__search") {
         DOM.searchCompany(event);
       }
@@ -60,51 +60,6 @@ class DOM {
     });
   }
 
-  static renderCompany({ logo, name, slug, users }) {
-    if (users.length == 0) {
-      return "";
-    }
-    return `
-          <div class="company">
-            <img
-              src="${logo}"
-              alt="${slug}-logo"
-            />
-            <div class="company__info" >
-              <ul id="${slug}">
-                <li>${name}</li>
-                <li>${users.length} grads working here as:</li>
-                  ${helper(users)}
-              </ul>
-              
-              
-            </div>
-          </div>
-  `;
-    function helper(users){
-      let myArray = users.map(u => u.course)
-      return [...new Set(myArray)].map(course => `<li>${course}</li>`).join('')
-      
-    }
-
-  }
-
-  static renderGrad({ name, avatar, campus, cohort, course, id }) {
-    return `
-        <div class="gradcard" id='${id}'>
-            <div class="grad">
-              <img src="${avatar}">
-            </div>
-            <h1>${name}</h1>
-            <ul class="card__info">
-              <li>${course}</li>
-                <span class="hr"></span>
-              <li>${campus}</li>
-              <li>${cohort}</li>
-            </ul>
-        </div>
-  `;
-  }
   static HTMLify(array, method) {
     return array.map(method).join("");
   }
