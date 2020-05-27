@@ -32,9 +32,9 @@ body {
 }
 
 h1 {
-  color: aqua;
-  background-color: blue;
-  padding: 20px;
+  color:black;
+  background-color: #01cfc7;
+  font-size: 50px;
   text-align: center;
 }
 h2 {
