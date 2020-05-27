@@ -4,18 +4,20 @@ class HTMLBuilder {
   static HTMLify(array, method) {
     return array.map(method).join("");
   }
-  static gradCard({ name, avatar, campus, cohort, course, id }) {
+  static gradCard({ name, avatar, campus, cohort, course, id, company }) {
     return `
-        <div class="gradcard" id='${id}'>
+        <div class="gradcard" id="${id}">
             <div class="grad">
-              <img src="${avatar}">
+              <img src="${avatar}" alt="grad${id} avatar">
             </div>
             <h1>${name}</h1>
             <ul class="card__info">
               <li>${course}</li>
-                <span class="hr"></span>
               <li>${campus}</li>
               <li>${cohort}</li>
+              <span class="hr">working at:</span>
+              <li class="working_at">${company.name}</li>
+              <li class="working_at specialClick"><img  class="specialClick" src="${company.logo}" alt="${company.name}-logo" id="${company.slug}"></li>
             </ul>
         </div>
   `;
@@ -73,7 +75,7 @@ class HTMLBuilder {
   }
 
   static gradsFormBuilder() {
-    let html = '<form action="">';
+    let html = "<form>";
     let course = [
       "Software Engineering",
       "Data Science",
@@ -127,9 +129,9 @@ class HTMLBuilder {
         } else if (attr == "remote_work") {
           return `
             <div class="float-label">
-              <input type="radio" id="Remote" name='remote_work' value="true">
+              <input type="radio" id="Remote" name="remote_work" value="true">
               <label for="Remote">Working Remotely</label><br>
-              <input type="radio" id="Office" name='remote_work' value="false" checked>
+              <input type="radio" id="Office" name="remote_work" value="false" checked>
               <label for="Office">Office Base</label><br>
             </div>
             `;
@@ -144,7 +146,7 @@ class HTMLBuilder {
       })
       .join("");
     html +=
-      '</form><input type="submit" value="submit" class="button__add button__submit">';
+     '</form><input type="submit" value="submit" class="button__add button__submit">';
     return html;
   }
 
@@ -167,7 +169,7 @@ class HTMLBuilder {
     </select>
     </div>`;
   }
-  static companiesFormBuilder(){
+  static companiesFormBuilder() {
     return `
     <form>
       <div class="float-label">

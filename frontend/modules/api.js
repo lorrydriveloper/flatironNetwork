@@ -21,18 +21,18 @@ class ApiAdapter {
       return json;
     } catch (error) {
       console.log(error.message);
-      return error
+      return error;
     }
   }
 
-  static async postRequest(url,object) {
+  static async postRequest(url, object) {
     let configurationObject = {
       method: "Post",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(object)
+      body: JSON.stringify(object),
     };
     try {
       const response = await fetch(this.URL + url, configurationObject);
@@ -40,30 +40,33 @@ class ApiAdapter {
       return json;
     } catch (error) {
       console.log(error);
-      return error  
+      return error;
     }
   }
 
-  static async postNewGrad(object){
+  static async postNewGrad(object) {
     let grad = await this.postRequest("users", { user: object });
     if (grad.error) {
-       DOM.renderError(grad, DOM.grads)
+      DOM.renderError(grad, DOM.grads);
     } else {
       DOM.displayGrads.insertAdjacentHTML(
-       "afterbegin",
-       HTMLBuilder.gradCard(grad)
-     );
-     DOM.toggleForm(DOM.grads);
-     Map.createMarker(grad)
+        "afterbegin",
+        HTMLBuilder.gradCard(grad)
+      );
+      DOM.toggleForm(DOM.grads);
+      Map.createMarker(grad);
     }
   }
-  static async postNewCompany(object){
-    let company = await this.postRequest('companies', {company: object})
+  static async postNewCompany(object) {
+    let company = await this.postRequest("companies", { company: object });
     if (company.error) {
       DOM.renderError(company, DOM.companies);
     } else {
-      this.Allcompanies.push(company)
-      DOM.displayCompanies.insertAdjacentHTML('afterbegin', HTMLBuilder.companyDiv(company))
+      this.Allcompanies.push(company);
+      DOM.displayCompanies.insertAdjacentHTML(
+        "afterbegin",
+        HTMLBuilder.companyDiv(company)
+      );
       DOM.toggleForm(DOM.companies);
     }
   }
@@ -72,17 +75,29 @@ class ApiAdapter {
     let grads = await this.getRequest("users");
     this.allGrads = grads;
     Map.init(grads);
-    DOM.displayGrads.innerHTML += HTMLBuilder.HTMLify(grads, HTMLBuilder.gradCard);
+    DOM.displayGrads.innerHTML += HTMLBuilder.HTMLify(
+      grads,
+      HTMLBuilder.gradCard
+    );
   }
 
   static async fetchCompanies() {
     let companies = (this.Allcompanies = await this.getRequest("companies"));
-    DOM.displayCompanies.innerHTML += HTMLBuilder.HTMLify(companies, HTMLBuilder.companyDiv);
+    DOM.displayCompanies.innerHTML += HTMLBuilder.HTMLify(
+      companies,
+      HTMLBuilder.companyDiv
+    );
     // adding datalist companies to toolkit
-    DOM.displayCompanies.previousElementSibling.innerHTML+= HTMLBuilder.datalist(companies)
+    DOM.displayCompanies.previousElementSibling.innerHTML += HTMLBuilder.datalist(
+      companies
+    );
   }
   static async fetchCompany(id) {
     let company = await this.getRequest(`companies/${id}`);
+    company.users.forEach(
+      (u) =>
+        (u.company = { name: company.name, logo: company.logo, slug: company.slug })
+    );
     Map.init(company.users);
     DOM.displayInfo.innerHTML = "";
     DOM.displayInfo.innerHTML += HTMLBuilder.HTMLify(

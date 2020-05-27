@@ -252,7 +252,7 @@ h2 {
   position: relative;
   background: linear-gradient(to left, #00d2c8, #1a8a9d);
   border-radius: 35px;
-  min-height: 300px;
+  height: 315px;
   width: 300px;
   margin: 40px auto;
 }
@@ -285,6 +285,15 @@ h2 {
   font-size: 0.8em;
   margin: 0 6px;
   list-style: none;
+}
+
+.card__info .working_at{
+  font-size: 20px;
+}
+.card__info .working_at img{
+  height: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 #companies {
