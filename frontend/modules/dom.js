@@ -10,6 +10,7 @@ class DOM {
   static displayInfo = info.querySelector(".display-info");
   static displayGrads = grads.querySelector(".grid-container");
   static searchGradButton = document.querySelector("#searchGrad");
+  static query = document.querySelector('#query')
 
   static renderNewGradForm() {
     this.grads.children[0].innerHTML += '<p class="close">close X</p>';
@@ -28,8 +29,14 @@ class DOM {
   }
 
   static addListeners() {
+
+    query.addEventListener('keydown', function enterEvent(event){
+      if (event.keyCode == 13) {
+        DOM.makeSearch(grads)
+      }
+    })
+
     grads.addEventListener("click", function gradsEvents(event) {
-      console.log(event)
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       }
@@ -41,7 +48,6 @@ class DOM {
       }
       else if (event.target.value == "submit") {
         event.preventDefault();
-        console.log(event.target);
         let newGradObj = DOM.grabValuesForm(
           event.target.previousSibling.children
         );
@@ -75,7 +81,7 @@ class DOM {
   }
   static renderSearch(array) {
     this.displayGrads.innerHTML = "";
-    this.displayGrads.innerHTML = array.map(DOM.renderGrad).join("");
+    this.displayGrads.innerHTML = array.map(HTMLBuilder.gradCard).join("");
   }
 
   static makeSearch(pointer) {
