@@ -18,26 +18,12 @@ class Api::V1::CompaniesController < ApplicationController
   def create
     company = Company.new(company_params)
     if company.save
-      render json: company, except: %i[created_at updated_at]
+      render json: company, except: %i[created_at updated_at], include: :users
     else
       render json: {
-        status: 404,
-        message: 'Error saving on DB'
-      }
-    end
-  end
-
-  def update
-    
-
-
-    company = Company.friendly.find(params[:id])
-    if company.update_attributes(company_params)
-      render json: company, except: %i[created_at updated_at]
-    else
-      render json: {
-        status: 404,
-        message: 'Error saving on DB'
+        error: 'Unable to save entity',
+        message: company.errors.full_messages.join(', ').to_s,
+        status: :bad_request
       }
     end
   end
@@ -45,6 +31,6 @@ class Api::V1::CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:name, :logo, :address)
+    params.require(:company).permit(:name, :logo)
   end
 end
