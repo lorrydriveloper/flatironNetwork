@@ -78,7 +78,7 @@ class ApiAdapter {
   static async fetchCompanies() {
     let companies = (this.Allcompanies = await this.getRequest("companies"));
     DOM.displayCompanies.innerHTML += HTMLBuilder.HTMLify(companies, HTMLBuilder.companyDiv);
-    // adding datalist companie to toolkit
+    // adding datalist companies to toolkit
     DOM.displayCompanies.previousElementSibling.innerHTML+= HTMLBuilder.datalist(companies)
   }
   static async fetchCompany(id) {

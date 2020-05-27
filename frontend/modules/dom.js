@@ -123,11 +123,11 @@ class DOM {
     let company = ApiAdapter.Allcompanies.find((e) => e.name == value);
     this.displayCompanies.innerHTML = "";
     if (company) {
-      this.displayCompanies.innerHTML += this.renderCompany(company);
+      this.displayCompanies.innerHTML += HTMLBuilder.companyDiv(company);
     } else {
-      this.displayCompanies.innerHTML += this.HTMLify(
+      this.displayCompanies.innerHTML += HTMLBuilder.HTMLify(
         ApiAdapter.Allcompanies,
-        this.renderCompany
+        HTMLBuilder.companyDiv
       );
     }
   }
