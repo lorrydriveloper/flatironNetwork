@@ -4,7 +4,13 @@ class Api::V1::UsersController < ApplicationController
   def index
     users = User.all
 
-    render json: users.reverse, except: %i[created_at updated_at]
+    render json: users.reverse,
+           include: {
+             company: {
+               only: %i[name logo slug]
+             }
+           },
+           except: %i[updated_at created_at]
   end
 
   def create
@@ -13,7 +19,11 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: user, except: %i[created_at updated_at]
     else
-      render json: { error: 'Unable to save entity', message: "#{user.errors.full_messages.join(', ')} " }, status: :bad_request
+      render json: {
+        error: 'Unable to save entity',
+        message: "#{user.errors.full_messages.join(', ')} ",
+        status: :bad_request
+      }
     end
   end
 
