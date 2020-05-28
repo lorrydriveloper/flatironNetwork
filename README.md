@@ -1,7 +1,6 @@
 # <center>Flatiron Network</center>
 <center><img src="https://i.imgur.com/VBolm77.png" alt="drawing" width="800"/></center>
 
-## [Github Repo](https://github.com/reddevilcero/sushi-store)
 ## [Video Demostration](https://youtu.be/w1s3MoTHuHY)
 
 Today's blog is about the last project I have created for the Flatiron Curriculum. It's the first time I have worked with JS more in deep than few DOM manipulations in previous projects, and I have to say I fell in love whit it. I don't know why people blame the language when it is compelling and powerful. I love the functions as first-class and are compelling, the Prototypal inheritance, and the closures and its implication. Most of us feel like JavaScript is "Weird" and all those things. Still, when we start to learn Ruby and later Ruby on Rails when we have a doubt, or something was entirely reasonable that you went to the documentation and looked at what do you want to accomplish. I guess that you don't even know that there is an official documentation/specification for JavaScript apart of if you use the MDN that it is an excellent resource. 
