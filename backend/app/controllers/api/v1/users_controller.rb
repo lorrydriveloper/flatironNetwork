@@ -17,7 +17,13 @@ class Api::V1::UsersController < ApplicationController
     user = User.new(user_params)
     user.company = Company.friendly.find(params[:user][:company])
     if user.save
-      render json: user, except: %i[created_at updated_at]
+      render json: user,
+             include: {
+               company: {
+                 only: %i[name logo slug]
+               }
+             },
+             except: %i[updated_at created_at]
     else
       render json: {
         error: 'Unable to save entity',

@@ -33,7 +33,7 @@ class DOM {
   static addListeners() {
     document.addEventListener('click', function clickOnLogo(event){
       if(event.target.className == 'specialClick'){
-        ApiAdapter.fetchCompany(event.target.id);
+        ApiAdapter.fetchCompany(event.target.id)
       }
     })
 
