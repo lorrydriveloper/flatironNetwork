@@ -11,6 +11,8 @@ class DOM {
   static displayGrads = grads.querySelector(".grid-container");
   static searchGradButton = document.querySelector("#searchGrad");
   static query = document.querySelector("#query");
+  static byDate = document.querySelector('#byDate')
+
 
   static renderNewGradForm() {
     this.grads.children[0].innerHTML += '<p class="close">close X</p>';
@@ -44,13 +46,27 @@ class DOM {
     });
 
     grads.addEventListener("click", function gradsEvents(event) {
+      console.log(event.target)
       if (event.target.id == "searchGrad") {
         DOM.makeSearch(this);
       } else if (event.target.id == "new-grad") {
         DOM.renderNewGradForm();
       } else if (event.target.className == "close") {
         DOM.toggleForm(this);
-      } else if (event.target.value == "submit") {
+      } else if(event.target.id === 'byDate'){
+        DOM.displayGrads.innerHTML = ''
+        let sortedGrads = ApiAdapter.allGrads.sort((a,b)=> {
+          if(a.name < b.name){
+            return -1
+          }else if (a.name > b.name){
+            return 1
+          }
+          return 0
+        } ) 
+
+        DOM.displayGrads.innerHTML += HTMLBuilder.HTMLify(sortedGrads, HTMLBuilder.gradCard)
+
+      }else if (event.target.value == "submit") {
         event.preventDefault();
         let newGradObj = DOM.grabValuesForm(
           event.target.previousSibling.children

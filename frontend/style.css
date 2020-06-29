@@ -287,10 +287,10 @@ h2 {
   list-style: none;
 }
 
-.card__info .working_at{
+.card__info .working_at {
   font-size: 20px;
 }
-.card__info .working_at img{
+.card__info .working_at img {
   height: 35px;
   margin-bottom: 10px;
   cursor: pointer;

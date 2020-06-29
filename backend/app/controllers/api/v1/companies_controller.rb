@@ -13,6 +13,7 @@ class Api::V1::CompaniesController < ApplicationController
     else
       render json: { error: "Can't find ", message: "Sorry, we can't find that company in our records" }, status: :bad_request
     end
+    
   end
 
   def create
